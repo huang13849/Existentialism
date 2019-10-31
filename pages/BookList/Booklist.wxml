@@ -1,2 +1,7 @@
-<!--pages/BookList/Booklist.wxml-->
-<text>pages/BookList/Booklist.wxml</text>
+<text>1111s</text>
+
+
+<view wx:for="{{students}}">{{item.id}}--{{item.name}}</view>
+
+<view>计数{{counter}}</view>
+<button size='mini' bindtap='handleButtonClick'>+</button>

@@ -1,54 +1,116 @@
 //index.js
 //获取应用实例
-const app = getApp()
-
+var app = getApp();
+const request=require("../../utils/requests");
+var star = require("../../utils/star");
 Page({
   data: {
     motto: 'Hello World',
     userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    count:0,
+    imgUrls:[
+      "../../images/banner1.jpg",
+      "../../images/banner2.jpg"
+      ],
+    indicatorDots: true,
+    autoplay: true,
+    interval: 5000,
+    duration: 1000,
+    toRe:0
+
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+  toHandel:function () {
+      var that=this;
+      wx.showToast({
+          title: '加载中',
+          icon: 'loading',
+          duration: 1000
+      })
+      request.getBookList(that.data.toRe,"",function(res){
+          var types = res.data.books;
+          for (var i = 0; i < types.length; ++i) {
+              var book = types[i];
+              var rating = book.rating;
+
+              rating.block = star.get_star(rating.average);
+          }
+          res.data.books = types;
+          console.log(res.data.books);
+          if(res.data.count==0){
+              return;
+          }
+          that.setData({bookList:res.data.books,count:that.data.count+res.data.count});
+
+      });
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
+  toRefresh: function (e) {
+      var that=this;
       this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+          toRe : star.toRefresh()
+      });
+      that.toHandel();
+      console.log("随机换一个栏目ID");
+      console.log(that.data.toRe);
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+  onLoad:function (options) {
+      var that=this;
+      that.setData({
+          toRe : star.toRefresh()
+      });
+      console.log("加载");
+      console.log(that.data.toRe);
+
+
+      request.getBookList(that.data.toRe,"",function(res){
+          var types = res.data.books;
+          for (var i = 0; i < types.length; ++i) {
+              var book = types[i];
+              var rating = book.rating;
+
+              rating.block = star.get_star(rating.average);
+          }
+          res.data.books = types;
+          console.log(res.data.books);
+          if(res.data.count==0){
+              return;
+          }
+          that.setData({bookList:res.data.books,count:that.data.count+res.data.count});
+
+      });
+
+
+  },
+   /* toRefresh:function(){
+      var that=this;
+        this.setData({start:0});
+        that.searchHandel();
+    },*/
+  upper: function(e) {
+    console.log("已到顶部");
+
+  },
+  lower: function(e) {
+    console.log("已到低部");
+    var that=this;
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 10000
+    });
+    request.getBookList(that.data.toRe,{start:that.data.count},function(res){
+        var types = res.data.books;
+        for (var i = 0; i < types.length; ++i) {
+            var book = types[i];
+            var rating = book.rating;
+            rating.block = star.get_star(rating.average);
+        }
+        res.data.books = types;
+        console.log(res.data.books);
+      if(res.data.count==0){return;}
+      that.setData({bookList:that.data.bookList.concat(res.data.books),count:that.data.count+res.data.count});
+      wx.hideToast();
     })
   }
+
+
 })
