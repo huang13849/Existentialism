@@ -12,7 +12,8 @@ Page({
       { id: 102, name: 'vvv', age: '28' },
       { id: 103, name: 'ddd', age: '18' }
     ],
-    counter:0
+    counter:0,
+    message:'12321'
   },
   handleButtonClick(){
     console.log('按钮发生'),
@@ -20,6 +21,9 @@ Page({
     this.setData({
       counter:this.data.counter +=1
     })
+  },
+  handleBtnClick(){
+    this.setData({message:'aasda'})
   },
   /**
    * 生命周期函数--监听页面加载

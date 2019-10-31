@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {},
+  "navigationBarTitleText": "存在听书",
+  "navigationBargroundColor":"#ff0000"
 }
