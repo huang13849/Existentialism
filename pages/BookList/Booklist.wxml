@@ -1,9 +1,30 @@
-<text>1111s</text>
+<view class="wrapper-content">
+  <view class="ibox-top">
+    <text class="ibox-title">您可能感兴趣</text>
+    <view class="ibox-refresh" bindtap="toRefresh">换一批</view>
+  </view>
+  <view class="list-container">
+    <view class="list-ui">
+      <block wx:for="{{booklist}}" wx:key="book_id">
+        <navigator class="list-nav " hover-class="nav-hover " url=" ">
+          <view class="book-item ">
+            <image class="book-item-img " src="{{item.book_img_url}} "></image>
+            <view class="book-item-infos ">
+              <view class="book-title ">{{item.book_name}}</view>
+
+              <view class="book-star-box ">
+                <image class="star-img " src=" "></image>
+                <text class="average-rating "></text>
+              </view>
 
 
-<view wx:for="{{students}}">{{item.id}}--{{item.name}}</view>
+            </view>
+          </view>
+        </navigator>
+      </block>
 
-<view>计数{{counter}}</view>
-<button size='mini' bindtap='handleButtonClick'>+</button>
 
-<button size='mini' bindtap='handleBtnClick'>{{message}}</button>
+    </view>
+
+  </view>
+</view>
