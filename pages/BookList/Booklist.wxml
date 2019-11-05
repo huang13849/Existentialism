@@ -8,15 +8,14 @@
       <block wx:for="{{booklist}}" wx:key="book_id">
         <navigator class="list-nav " hover-class="nav-hover " url=" ">
           <view class="book-item ">
-            <image class="book-item-img " src="{{item.book_img_url}} "></image>
+            <image class="book-item-img " src="cloud://exist-0nmi1.6578-exist-0nmi1-1300540023/book_img/{{item.BookId}}.JPG"></image>
             <view class="book-item-infos ">
               <view class="book-title ">{{item.book_name}}</view>
-
+              
               <view class="book-star-box ">
                 <image class="star-img " src=" "></image>
                 <text class="average-rating "></text>
               </view>
-
 
             </view>
           </view>

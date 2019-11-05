@@ -133,7 +133,7 @@ page{
     height: 282rpx;
 }
 .book-title{
-    font-size: 28rpx;
+    font-size: 20rpx;
     font-weight: bold;
     overflow: hidden;
     white-space: nowrap;
