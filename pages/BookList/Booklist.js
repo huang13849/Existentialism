@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    booklist: []
+    booklist:[]
   },
   toRefresh() {
     console.log('toRefresh');
@@ -30,12 +30,12 @@ Page({
       {env:'exist-0nmi1'}
     );
     const db =wx.cloud.database()
-    db.collection('books_v2').get({
-      success:res=>{
+    db.collection('books').get({
+      success: res => {
         console.log(res);
         const data = res.data
         this.setData({
-          booklist:data
+          booklist: data
         })
       }
     })

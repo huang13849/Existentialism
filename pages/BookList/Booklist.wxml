@@ -6,7 +6,7 @@
   <view class="list-container">
     <view class="list-ui">
       <block wx:for="{{booklist}}" wx:key="book_id">
-        <navigator class="list-nav " hover-class="nav-hover " url=" ">
+        <navigator class="list-nav " hover-class="nav-hover " url="../detail/detail?id={{item.BookId}}">
           <view class="book-item ">
             <image class="book-item-img " src="cloud://exist-0nmi1.6578-exist-0nmi1-1300540023/book_img/{{item.BookId}}.JPG"></image>
             <view class="book-item-infos ">

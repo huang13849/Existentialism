@@ -9,6 +9,7 @@ Page({
       // 页面初始化 options为页面跳转所带来的参数
       var that=this;
       that.setData({ id:options.id});
+      
       wx.showToast({
           title: '加载中',
           icon: 'loading',
