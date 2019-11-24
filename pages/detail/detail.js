@@ -16,14 +16,11 @@ Page({
           duration: 10000
       })
       request.getBookById(that.data.id,function(res){
-
           var types =res.data;
           var rating = types.rating;
           rating.block = star.get_star(rating.average);
-
           res.data = types;
           console.log(res.data);
-
           that.setData({bookInfo:res.data});
       });
   },

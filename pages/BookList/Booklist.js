@@ -7,7 +7,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    leads: [],
     booklist: [],
     book_categories: ['文学', '历史', '心理', '传记', '经管'],
     book_category_index: 0
@@ -22,25 +21,24 @@ Page({
   onLoad: function(options) {
     this.getBookCategory()
   },
+
   getBookCategory: function() {
     if (this.data.book_categories.length - this.data.book_category_index == 0) {
       this.data.book_category_index = 0;
     }
-    console.log(this.data.book_category_index + '@@@' + this.data.book_categories[this.data.book_category_index] + '###' + this.data.book_categories.length)
     wx.cloud.init({
       env: 'exist-0nmi1'
     });
     const db = wx.cloud.database();
-    db.collection('articles').where({
+    var dbResult = db.collection('articles').where({
       article_category: this.data.book_categories[this.data.book_category_index]
     }).get({
       success: res => {
-        const data = res.data
         this.setData({
-          booklist: data
+          booklist: res.data
         })
       }
-    })
+    });
   },
 
   /**

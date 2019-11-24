@@ -13,22 +13,23 @@ function request(url, data, successCb, errorCb, completeCb) {
   });
 }
 
-function requestBookList() {
-  console.log(book_category_index + '@@@' + book_categories[book_category_index])
-  wx.cloud.init({
-    env: 'exist-0nmi1'
-  });
-  const db = wx.cloud.database();
-  db.collection('articles').where({
-
-  }).get({
-    success: res => {
-      const data = res.data
-      this.setData({
-        booklist: data
-      })
-    }
-  })
+function requestBookList(origin_data) {
+      if (origin_data.book_categories.length - origin_data.book_category_index == 0) {
+        origin_data.book_category_index = 0;
+      }
+      wx.cloud.init({
+        env: 'exist-0nmi1'
+      });
+      const db = wx.cloud.database();
+      var dbResult = db.collection('articles').where({
+        article_category: origin_data.book_categories[origin_data.book_category_index]
+      }).get({
+        success: res => {
+          booklist: res.data
+          console.log(booklist)
+        }
+      });
+ 
 }
 
 //搜索图书 
@@ -44,8 +45,8 @@ function getBookList(id, data, successCb, errorCb, completeCb) {
   request(api.getBookList.replace(':id', id), data, successCb, errorCb, completeCb);
 }
 
-function getBookCategory() {
-  requestBookList();
+function getBookCategory(origin_data, successCb, errorCb, completeCb) {
+  requestBookList(origin_data, successCb, errorCb, completeCb);
 }
 //
 module.exports = {
