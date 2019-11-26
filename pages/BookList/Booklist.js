@@ -1,5 +1,5 @@
 // pages/BookList/Booklist.js
-const request = require("../../utils/requests");
+const request = require("../../utils/common");
 
 Page({
 

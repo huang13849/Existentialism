@@ -1,41 +1,34 @@
 // pages/detail/detail.js
-const request=require("../../utils/requests");
-var star = require("../../utils/star");
+const request = require("../../utils/common");
+
 Page({
-  data:{
-      id:""
+  data: {
+    bookItem:[]
   },
-  onLoad:function(options){
-      // 页面初始化 options为页面跳转所带来的参数
-      var that=this;
-      that.setData({ id:options.id});
-      
-      wx.showToast({
-          title: '加载中',
-          icon: 'loading',
-          duration: 10000
-      })
-      request.getBookById(that.data.id,function(res){
-          var types =res.data;
-          var rating = types.rating;
-          rating.block = star.get_star(rating.average);
-          res.data = types;
-          console.log(res.data);
-          that.setData({bookInfo:res.data});
-      });
+  onLoad: function(options) {
+    // 页面初始化 options为页面跳转所带来的参数
+    var that=this;
+    that.setData({
+      bookItem: options
+    });
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 10000
+    })
   },
-  onReady:function(){
+  onReady: function() {
     // 页面渲染完成
-   wx.hideToast();
+    wx.hideToast();
   },
-  onShow:function(){
+  onShow: function() {
     // 页面显示
     console.log("显示");
   },
-  onHide:function(){
+  onHide: function() {
     // 页面隐藏
   },
-  onUnload:function(){
+  onUnload: function() {
     // 页面关闭
   }
 })

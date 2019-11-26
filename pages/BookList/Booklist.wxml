@@ -6,7 +6,7 @@
   <view class="list-container">
     <view class="list-ui">
       <block wx:for="{{booklist}}" wx:key="article_id">
-        <navigator class="list-nav " hover-class="nav-hover " url="../detail/detail?id={{item.article_id}}">
+        <navigator class="list-nav " hover-class="nav-hover " url="../detail/detail?id={{item.article_id}}&record={{item.record_url}}&secondary={{item.secondary_img_url}}&bookname={{item.book_name}}&author={{item.book_author}}&interp={{item.interpreter}}&interpintro={{item.interpreter_intro}}&recorder={{item.recorder}}&avatar={{item.interpreter_avatar}}">
           <view class="book-item ">
             <image wx:if='{{item.primary_img_url}}' class="book-item-img " src="{{item.primary_img_url}}"></image>
             <view class="book-item-infos ">

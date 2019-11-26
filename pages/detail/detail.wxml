@@ -3,15 +3,16 @@
   <scroll-view class="wrapper-scroll" scroll-y="true" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-top="100">
     <view class="detail-box">
       <view class="detail-box-bg" style=" background-image: url({{bookInfo.images.large}})"></view>
-      <image class="detail-img" src="{{bookInfo.images.large}}"></image>
+      <image class="detail-img" src="{{bookItem.secondary}}"></image>
     </view>
-
+    <audio poster="{{bookItem.interp}}" name="{{bookItem.bookname}}" author="{{bookItem.author}}" src="{{bookItem.record}}" controls></audio>
     <view class="detail-info">
       <view class="detail-fl">
         <view class="detail-title">{{bookInfo.title}}</view>
-        <view class="detail-text detail-author">作者：{{bookInfo.author}}</view>
-        <view class="detail-text  detail-publisher">出版社：{{bookInfo.publisher}}</view>
-        <view class="detail-text  detail-pubdate">出版时间：{{bookInfo.pubdate}}</view>
+        <view class="detail-text detail-author">书名：{{bookItem.bookname}}</view>
+        <view class="detail-text detail-author">作者：{{bookItem.author}}</view>
+        <view class="detail-text  detail-publisher">解读人：{{bookItem.interp}}</view>
+        <view class="detail-text  detail-pubdate">解读人简介：{{bookItem.interpintro}}</view>
         <view class="detail-tags">
 
           <text wx:if="bookInfo.tags[0].title">{{bookInfo.tags[0].title}}</text>
@@ -19,11 +20,10 @@
           <text wx:if="bookInfo.tags[2].title">{{bookInfo.tags[2].title}}</text>
         </view>
       </view>
+
       <view class="detail-fr">
-        <view class="detail-star-box">
-          <view class="detail-star">{{bookInfo.rating.average}}</view>
-          <image class="detail-star-img" src="{{bookInfo.rating.block}}"></image>
-        </view>
+          <image class="detail-star-box" src="{{bookItem.avatar}}"></image>
+     
 
       </view>
 
@@ -34,7 +34,6 @@
 
       <view class="ibox-content">
         <view>{{bookInfo.summary}}</view>
-
       </view>
     </view>
 
